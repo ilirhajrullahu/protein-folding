@@ -1,9 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Candidate {
 
@@ -90,7 +88,7 @@ public class Candidate {
       for (int j = 0; j < this.folding[i].length; ++j) {
         if (checkVerticalFoldingNeighbour(i, j) == true
             || checkHorizontalFoldingNeighbours(i, j) == true) {
-          this.fitness += 1.0;
+          this.fitness -= 1.0;
         }
       }
     }

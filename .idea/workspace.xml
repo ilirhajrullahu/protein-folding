@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d2479db-17ac-41e5-9c73-5ec3a87210ce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProteinFolding/src/com/company/Candidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProteinFolding/src/com/company/Candidate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProteinFolding/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProteinFolding/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Candidate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Candidate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605296487611</updated>
       <workItem from="1605296489814" duration="8918000" />
-      <workItem from="1605375823411" duration="5507000" />
+      <workItem from="1605375823411" duration="5544000" />
     </task>
     <servers />
   </component>
