@@ -33,26 +33,55 @@ public class Candidate {
   }
 
   public void foldSequence() {
-    this.folding[0][0] = this.sequence.get(0);
-    this.folding[1][0] = this.sequence.get(1);
-    this.folding[1][1] = this.sequence.get(2);
-    this.folding[1][2] = this.sequence.get(3);
-    this.folding[2][2] = this.sequence.get(4);
-    this.folding[2][1] = this.sequence.get(5);
-    this.folding[3][1] = this.sequence.get(6);
-    this.folding[3][2] = this.sequence.get(7);
-    this.folding[4][2] = this.sequence.get(8);
-    this.folding[5][2] = this.sequence.get(9);
-    this.folding[5][3] = this.sequence.get(10);
-    this.folding[4][3] = this.sequence.get(11);
-    this.folding[3][3] = this.sequence.get(12);
-    this.folding[3][4] = this.sequence.get(13);
-    this.folding[4][4] = this.sequence.get(14);
-    this.folding[5][4] = this.sequence.get(15);
-    this.folding[5][5] = this.sequence.get(16);
-    this.folding[4][5] = this.sequence.get(17);
-    this.folding[3][5] = this.sequence.get(18);
-    this.folding[2][5] = this.sequence.get(19);
+    if (sequence.size() == 20) {
+      this.folding[0][0] = this.sequence.get(0);
+      this.folding[1][0] = this.sequence.get(1);
+      this.folding[1][1] = this.sequence.get(2);
+      this.folding[1][2] = this.sequence.get(3);
+      this.folding[2][2] = this.sequence.get(4);
+      this.folding[2][1] = this.sequence.get(5);
+      this.folding[3][1] = this.sequence.get(6);
+      this.folding[3][2] = this.sequence.get(7);
+      this.folding[4][2] = this.sequence.get(8);
+      this.folding[5][2] = this.sequence.get(9);
+      this.folding[5][3] = this.sequence.get(10);
+      this.folding[4][3] = this.sequence.get(11);
+      this.folding[3][3] = this.sequence.get(12);
+      this.folding[3][4] = this.sequence.get(13);
+      this.folding[4][4] = this.sequence.get(14);
+      this.folding[5][4] = this.sequence.get(15);
+      this.folding[5][5] = this.sequence.get(16);
+      this.folding[4][5] = this.sequence.get(17);
+      this.folding[3][5] = this.sequence.get(18);
+      this.folding[2][5] = this.sequence.get(19);
+    }
+    if (sequence.size() == 24) {
+      this.folding[2][0] = this.sequence.get(0);
+      this.folding[2][1] = this.sequence.get(1);
+      this.folding[3][1] = this.sequence.get(2);
+      this.folding[3][2] = this.sequence.get(3);
+      this.folding[2][2] = this.sequence.get(4);
+      this.folding[2][3] = this.sequence.get(5);
+      this.folding[3][3] = this.sequence.get(6);
+      this.folding[3][4] = this.sequence.get(7);
+      this.folding[2][4] = this.sequence.get(8);
+      this.folding[2][5] = this.sequence.get(9);
+      this.folding[3][5] = this.sequence.get(10);
+      this.folding[4][5] = this.sequence.get(11);
+      this.folding[5][5] = this.sequence.get(12);
+      this.folding[5][4] = this.sequence.get(13);
+      this.folding[4][4] = this.sequence.get(14);
+      this.folding[4][3] = this.sequence.get(15);
+      this.folding[5][3] = this.sequence.get(16);
+      this.folding[5][2] = this.sequence.get(17);
+      this.folding[6][2] = this.sequence.get(18);
+      this.folding[6][3] = this.sequence.get(19);
+      this.folding[7][3] = this.sequence.get(20);
+      this.folding[7][4] = this.sequence.get(21);
+      this.folding[6][4] = this.sequence.get(22);
+      this.folding[6][5] = this.sequence.get(23);
+    }
+
     System.out.println("Finished folding");
   }
 
