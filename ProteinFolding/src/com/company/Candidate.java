@@ -2,16 +2,18 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Candidate {
 
   List<Aminoacid> sequence;
-
   Aminoacid[][] folding;
-  double fitness;
+  int fitness;
+  int overlappings;
 
   public Candidate(String pSequence, int pLatticeSize) {
-    this.fitness = 0.0;
+    this.overlappings = 0;
+    this.fitness = 0;
     this.sequence = new ArrayList<Aminoacid>();
     if (pSequence != "") {
       for (int i = 0; i < pSequence.length(); ++i) {
@@ -27,71 +29,84 @@ public class Candidate {
         this.folding[i][j] = new Aminoacid(-1, -1);
       }
     }
-    //printFolding();
+    this.foldSequence();
+    this.calculateFitness();
   }
 
   public void foldSequence() {
-    if (sequence.size() == 20) {
-      this.folding[0][0] = this.sequence.get(0);
-      this.folding[1][0] = this.sequence.get(1);
-      this.folding[1][1] = this.sequence.get(2);
-      this.folding[1][2] = this.sequence.get(3);
-      this.folding[2][2] = this.sequence.get(4);
-      this.folding[2][1] = this.sequence.get(5);
-      this.folding[3][1] = this.sequence.get(6);
-      this.folding[3][2] = this.sequence.get(7);
-      this.folding[4][2] = this.sequence.get(8);
-      this.folding[5][2] = this.sequence.get(9);
-      this.folding[5][3] = this.sequence.get(10);
-      this.folding[4][3] = this.sequence.get(11);
-      this.folding[3][3] = this.sequence.get(12);
-      this.folding[3][4] = this.sequence.get(13);
-      this.folding[4][4] = this.sequence.get(14);
-      this.folding[5][4] = this.sequence.get(15);
-      this.folding[5][5] = this.sequence.get(16);
-      this.folding[4][5] = this.sequence.get(17);
-      this.folding[3][5] = this.sequence.get(18);
-      this.folding[2][5] = this.sequence.get(19);
-    }
-    if (sequence.size() == 24) {
-      this.folding[2][0] = this.sequence.get(0);
-      this.folding[2][1] = this.sequence.get(1);
-      this.folding[3][1] = this.sequence.get(2);
-      this.folding[3][2] = this.sequence.get(3);
-      this.folding[2][2] = this.sequence.get(4);
-      this.folding[2][3] = this.sequence.get(5);
-      this.folding[3][3] = this.sequence.get(6);
-      this.folding[3][4] = this.sequence.get(7);
-      this.folding[2][4] = this.sequence.get(8);
-      this.folding[2][5] = this.sequence.get(9);
-      this.folding[3][5] = this.sequence.get(10);
-      this.folding[4][5] = this.sequence.get(11);
-      this.folding[5][5] = this.sequence.get(12);
-      this.folding[5][4] = this.sequence.get(13);
-      this.folding[4][4] = this.sequence.get(14);
-      this.folding[4][3] = this.sequence.get(15);
-      this.folding[5][3] = this.sequence.get(16);
-      this.folding[5][2] = this.sequence.get(17);
-      this.folding[6][2] = this.sequence.get(18);
-      this.folding[6][3] = this.sequence.get(19);
-      this.folding[7][3] = this.sequence.get(20);
-      this.folding[7][4] = this.sequence.get(21);
-      this.folding[6][4] = this.sequence.get(22);
-      this.folding[6][5] = this.sequence.get(23);
-    }
+    // 1 = ost
+    // 2 = west
+    // 3 = süd
+    // 4 = nord
 
+    int middleOfMatrix = this.folding.length / 2 ;
+    this.folding[middleOfMatrix][middleOfMatrix] = this.sequence.get(0);
+    int lastI = middleOfMatrix;
+    int lastJ = middleOfMatrix;
+
+    for (int i = 1; i < this.sequence.size();++i){
+      Random ran = new Random();
+      int x = ran.nextInt(4) + 1;
+      System.out.println("Random direction: " + x);
+      switch(x){
+        case 1:
+          if (checkOverlapping(lastI,lastJ+1) == true){
+            this.overlappings += 1;
+          }
+          this.folding[lastI][lastJ+1] = this.sequence.get(i);
+          lastI  = lastI;
+          lastJ = lastJ + 1;
+          break;
+        case 2:
+          if (checkOverlapping(lastI,lastJ-1) == true){
+            this.overlappings += 1;
+          }
+          this.folding[lastI][lastJ-1] = this.sequence.get(i);
+          lastI  = lastI;
+          lastJ = lastJ - 1;
+          break;
+        case 3:
+          if (checkOverlapping(lastI+1,lastJ) == true){
+            this.overlappings += 1;
+          }
+          this.folding[lastI+1][lastJ] = this.sequence.get(i);
+          lastI  = lastI+1;
+          lastJ = lastJ;
+          break;
+        case 4:
+          if (checkOverlapping(lastI-1,lastJ) == true){
+            this.overlappings += 1;
+          }
+          this.folding[lastI-1][lastJ] = this.sequence.get(i);
+          lastI  = lastI -1;
+          lastJ = lastJ;
+          break;
+        default:
+          System.out.println("No random correct number was created");
+      }
+    }
     System.out.println("Finished folding");
   }
 
   public void calculateFitness() {
     for (int i = 0; i < this.folding.length; ++i) {
       for (int j = 0; j < this.folding[i].length; ++j) {
-        if (checkVerticalFoldingNeighbour(i, j) == true
+        if (checkVerticalFoldingNeighbours(i, j) == true
             || checkHorizontalFoldingNeighbours(i, j) == true) {
-          this.fitness -= 1.0;
+          this.fitness += 1.0;
         }
       }
     }
+  }
+
+  public boolean checkOverlapping(int i , int j){
+    boolean isOverlapping = false;
+    if (this.folding[i][j].getType() == 1 || this.folding[i][j].getType() == 0){
+      isOverlapping = true;
+    }else{
+      isOverlapping = false;
+    }
+    return isOverlapping;
   }
 
   public List<Aminoacid> getSequence() {
@@ -102,7 +117,7 @@ public class Candidate {
     return this.folding;
   }
 
-  public boolean checkVerticalFoldingNeighbour(int i, int j) {
+  public boolean checkVerticalFoldingNeighbours(int i, int j) {
     boolean areVerticalNeighbours = false;
     if (i - 1 >= 0) {
       if (this.folding[i][j].getType() == 1 && this.folding[i][j].getType() == this.folding[i
@@ -173,7 +188,11 @@ public class Candidate {
     }
   }
 
-  public double getFitness() {
+  public int getFitness() {
     return this.fitness;
+  }
+
+  public int getOverlappings() {
+    return this.overlappings;
   }
 }
