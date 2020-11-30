@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d2479db-17ac-41e5-9c73-5ec3a87210ce" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ProteinFolding/src/com/company/Generation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProteinFolding/src/com/company/Candidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProteinFolding/src/com/company/Candidate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProteinFolding/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProteinFolding/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Candidate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Candidate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,17 +56,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -96,6 +81,7 @@
       <workItem from="1605700136622" duration="959000" />
       <workItem from="1606293696191" duration="3000" />
       <workItem from="1606747624556" duration="5813000" />
+      <workItem from="1606764328274" duration="708000" />
     </task>
     <servers />
   </component>

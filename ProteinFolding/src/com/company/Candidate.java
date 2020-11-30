@@ -10,11 +10,13 @@ public class Candidate {
   Aminoacid[][] folding;
   int fitness;
   int overlappings;
+  List <Integer> foldingDirections;
 
   public Candidate(String pSequence, int pLatticeSize) {
     this.overlappings = 0;
     this.fitness = 0;
     this.sequence = new ArrayList<Aminoacid>();
+    this.foldingDirections = new ArrayList<Integer>();
     if (pSequence != "") {
       for (int i = 0; i < pSequence.length(); ++i) {
         this.sequence.add(new Aminoacid(Character.getNumericValue(pSequence.charAt(i)), i));
@@ -48,6 +50,7 @@ public class Candidate {
       Random ran = new Random();
       int x = ran.nextInt(4) + 1;
       System.out.println("Random direction: " + x);
+      this.foldingDirections.add(x);
       switch(x){
         case 1:
           if (checkOverlapping(lastI,lastJ+1) == true){
