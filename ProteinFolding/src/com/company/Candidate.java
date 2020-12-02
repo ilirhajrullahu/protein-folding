@@ -3,7 +3,6 @@ package com.company;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.lang.Math;
 
 public class Candidate {
 
@@ -100,15 +99,17 @@ public class Candidate {
       for (int j = 0; j < this.folding[i].length; ++j) {
         if (checkVerticalFoldingNeighbours(i, j) == true
             || checkHorizontalFoldingNeighbours(i, j) == true) {
-          this.hydrophobContacts += 1.0;
+          this.hydrophobContacts += 1;
         }
       }
     }
   }
 
   public void calculateFitness() {
-    this.fitness = this.hydrophobContacts / Math.pow(5,this.overlappings);
-    this.fitness = Math.pow(5,(this.sequence.size()/2));
+    this.fitness = (double)this.hydrophobContacts / (double)(this.overlappings +1);
+    this.fitness = this.fitness * 1000;
+    this.fitness = Math.round(this.fitness);
+    this.fitness = this.fitness / 1000;
   }
 
   public boolean checkOverlapping(int i , int j){
