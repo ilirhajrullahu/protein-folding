@@ -3,18 +3,21 @@ package com.company;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.lang.Math;
 
 public class Candidate {
 
   List<Aminoacid> sequence;
   Aminoacid[][] folding;
-  int fitness;
+  double fitness;
   int overlappings;
+  int hydrophobContacts;
   List <Integer> foldingDirections;
 
   public Candidate(String pSequence, int pLatticeSize) {
     this.overlappings = 0;
-    this.fitness = 0;
+    this.hydrophobContacts = 0;
+    this.fitness = 0.0;
     this.sequence = new ArrayList<Aminoacid>();
     this.foldingDirections = new ArrayList<Integer>();
     if (pSequence != "") {
@@ -32,6 +35,7 @@ public class Candidate {
       }
     }
     this.foldSequence();
+    this.calculateHydrophobContacts();
     this.calculateFitness();
   }
 
@@ -91,15 +95,20 @@ public class Candidate {
     System.out.println("Finished folding");
   }
 
-  public void calculateFitness() {
+  public void calculateHydrophobContacts(){
     for (int i = 0; i < this.folding.length; ++i) {
       for (int j = 0; j < this.folding[i].length; ++j) {
         if (checkVerticalFoldingNeighbours(i, j) == true
             || checkHorizontalFoldingNeighbours(i, j) == true) {
-          this.fitness += 1.0;
+          this.hydrophobContacts += 1.0;
         }
       }
     }
+  }
+
+  public void calculateFitness() {
+    this.fitness = this.hydrophobContacts / Math.pow(5,this.overlappings);
+    this.fitness = Math.pow(5,(this.sequence.size()/2));
   }
 
   public boolean checkOverlapping(int i , int j){
@@ -191,8 +200,12 @@ public class Candidate {
     }
   }
 
-  public int getFitness() {
+  public double getFitness() {
     return this.fitness;
+  }
+
+  public double getHydrophobeContacts() {
+    return this.hydrophobContacts;
   }
 
   public int getOverlappings() {
