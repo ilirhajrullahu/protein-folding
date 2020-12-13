@@ -48,14 +48,14 @@ public class Generation {
   }
 
   public Candidate getBestCandidate() {
-    return bestCandidate;
+    return this.bestCandidate;
   }
 
   public int getGenerationNumber() {
-    return generationNumber;
+    return this.generationNumber;
   }
 
   public double getAverageFitness() {
-    return averageFitness;
+    return this.averageFitness;
   }
 }

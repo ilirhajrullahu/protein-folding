@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d2479db-17ac-41e5-9c73-5ec3a87210ce" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProteinFolding/src/LogFiles/algorithm-log.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProteinFolding/src/com/company/Logging.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProteinFolding/src/com/company/Generation.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProteinFolding/src/com/company/Generation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProteinFolding/src/com/company/GraphikBeispiel.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProteinFolding/src/com/company/GraphikBeispiel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProteinFolding/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProteinFolding/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Generation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Generation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/proteinfolding-geneticalalgorithm/com/company/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +42,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -84,8 +90,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GraphikBeispiel" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.GraphikBeispiel" />
       </list>
     </recent_temporary>
   </component>
@@ -112,11 +118,14 @@
       <workItem from="1606892987430" duration="20000" />
       <workItem from="1606900928480" duration="4620000" />
       <workItem from="1607446761637" duration="44000" />
-      <workItem from="1607855772883" duration="3127000" />
+      <workItem from="1607855772883" duration="5881000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
