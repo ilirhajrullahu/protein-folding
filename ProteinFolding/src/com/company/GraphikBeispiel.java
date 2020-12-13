@@ -49,7 +49,7 @@ public class GraphikBeispiel {
 
 		g2.drawString(label, 50 + cellSize/2 - labelWidth/2 , 50 + cellSize/2 + ascent/2);
 		
-		String folder = "/tmp/alex/ga";
+		String folder = "/Users/ilhajr/Desktop";
 		String filename = "bild.png";
 		if (new File(folder).exists() == false) new File(folder).mkdirs();
 		

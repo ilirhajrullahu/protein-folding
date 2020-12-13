@@ -7,10 +7,12 @@ public class Generation {
   List<Candidate> candidates;
   Candidate bestCandidate;
   int generationNumber;
+  double averageFitness;
 
   public Generation(int pNumber) {
     this.candidates = new ArrayList<Candidate>();
     this.generationNumber = pNumber;
+    this.averageFitness = 0.0;
   }
 
   public void addCandidate(Candidate candidate){
@@ -27,6 +29,7 @@ public class Generation {
       }
     }
     this.bestCandidate = this.candidates.get(candidatePos);
+    this.calculateAverageFitness();
   }
 
   public void printCandidates(){
@@ -34,5 +37,25 @@ public class Generation {
       System.out.println("Fitness: " + (this.candidates.get(i).getFitness() + " Contacts:  " + this.candidates.get(i).getHydrophobeContacts()+ " Overlappings:  " + this.candidates.get(i).getOverlappings()));
     }
     System.out.println( "Best Candidate Fitness: " + bestCandidate.getFitness() + " Best Candidate overlapping: " + bestCandidate.getOverlappings());
+  }
+
+  public void calculateAverageFitness(){
+    double temp = 0.0;
+    for (int i = 0; i < this.candidates.size(); ++i){
+      temp += this.candidates.get(i).getFitness();
+    }
+    this.averageFitness = temp / this.candidates.size();
+  }
+
+  public Candidate getBestCandidate() {
+    return bestCandidate;
+  }
+
+  public int getGenerationNumber() {
+    return generationNumber;
+  }
+
+  public double getAverageFitness() {
+    return averageFitness;
   }
 }
