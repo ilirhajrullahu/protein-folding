@@ -10,9 +10,7 @@ public class Logging {
 
   List<Generation> generations;
 
-
   public Logging(){
-
   }
 
   public void writeToCSV() throws IOException {
