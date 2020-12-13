@@ -5,20 +5,21 @@ import java.util.List;
 import java.util.Random;
 
 public class Candidate {
-
   List<Aminoacid> sequence;
   Aminoacid[][] folding;
   double fitness;
   int overlappings;
   int hydrophobContacts;
   List <Integer> foldingDirections;
+  ProteinGraphic foldingGraphic;
 
-  public Candidate(String pSequence, int pLatticeSize) {
+  public Candidate(String pSequence, int pLatticeSize,int pictureNumber) {
     this.overlappings = 0;
     this.hydrophobContacts = 0;
     this.fitness = 0.0;
     this.sequence = new ArrayList<Aminoacid>();
     this.foldingDirections = new ArrayList<Integer>();
+    foldingGraphic = new ProteinGraphic(pictureNumber);
     if (pSequence != "") {
       for (int i = 0; i < pSequence.length(); ++i) {
         this.sequence.add(new Aminoacid(Character.getNumericValue(pSequence.charAt(i)), i));
@@ -46,6 +47,7 @@ public class Candidate {
 
     int middleOfMatrix = this.folding.length / 2 ;
     this.folding[middleOfMatrix][middleOfMatrix] = this.sequence.get(0);
+    this.getFoldingGraphic().drawFirstAcid(this.sequence.get(0).getType());
     int lastI = middleOfMatrix;
     int lastJ = middleOfMatrix;
 
@@ -60,14 +62,17 @@ public class Candidate {
             this.overlappings += 1;
           }
           this.folding[lastI][lastJ+1] = this.sequence.get(i);
+          foldingGraphic.draw("ost",this.sequence.get(i).getType());
           lastI  = lastI;
           lastJ = lastJ + 1;
+
           break;
         case 2:
           if (checkOverlapping(lastI,lastJ-1) == true){
             this.overlappings += 1;
           }
           this.folding[lastI][lastJ-1] = this.sequence.get(i);
+          foldingGraphic.draw("west",this.sequence.get(i).getType());
           lastI  = lastI;
           lastJ = lastJ - 1;
           break;
@@ -76,6 +81,7 @@ public class Candidate {
             this.overlappings += 1;
           }
           this.folding[lastI+1][lastJ] = this.sequence.get(i);
+          foldingGraphic.draw("süd",this.sequence.get(i).getType());
           lastI  = lastI+1;
           lastJ = lastJ;
           break;
@@ -84,6 +90,7 @@ public class Candidate {
             this.overlappings += 1;
           }
           this.folding[lastI-1][lastJ] = this.sequence.get(i);
+          foldingGraphic.draw("nord",this.sequence.get(i).getType());
           lastI  = lastI -1;
           lastJ = lastJ;
           break;
@@ -91,6 +98,7 @@ public class Candidate {
           System.out.println("No random correct number was created");
       }
     }
+    this.foldingGraphic.saveToFile();
     System.out.println("Finished folding");
   }
 
@@ -211,5 +219,9 @@ public class Candidate {
 
   public int getOverlappings() {
     return this.overlappings;
+  }
+
+  public ProteinGraphic getFoldingGraphic() {
+    return this.foldingGraphic;
   }
 }

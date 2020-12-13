@@ -8,7 +8,7 @@ public class Main {
         Generation generation1 = new Generation(100);
 
         for (int i  = 0; i < 10;++i){
-            Candidate candidate = new Candidate(Examples.SEQ20,50);
+            Candidate candidate = new Candidate(Examples.SEQ20,50,i);
             generation1.addCandidate(candidate);
         }
         generation1.calculateBestCandidate();
