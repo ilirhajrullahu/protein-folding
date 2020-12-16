@@ -59,39 +59,47 @@ public class Candidate {
       this.foldingDirections.add(x);
       switch(x){
         case 1:
+          boolean overlap = false;
           if (checkOverlapping(lastI,lastJ+1) == true){
             this.overlappings += 1;
+            overlap = true;
           }
           this.folding[lastI][lastJ+1] = this.sequence.get(i);
-          this.foldingGraphic.draw("ost",this.sequence.get(i).getType());
+          this.foldingGraphic.draw("ost",this.sequence.get(i).getType(), String.valueOf(i),overlap);
           lastI  = lastI;
           lastJ = lastJ + 1;
 
           break;
         case 2:
+          boolean overlap2 = false;
           if (checkOverlapping(lastI,lastJ-1) == true){
             this.overlappings += 1;
+            overlap2 = true;
           }
           this.folding[lastI][lastJ-1] = this.sequence.get(i);
-          this.foldingGraphic.draw("west",this.sequence.get(i).getType());
+          this.foldingGraphic.draw("west",this.sequence.get(i).getType(),String.valueOf(i),overlap2);
           lastI  = lastI;
           lastJ = lastJ - 1;
           break;
         case 3:
+          boolean overlap3 = false;
           if (checkOverlapping(lastI+1,lastJ) == true){
             this.overlappings += 1;
+            overlap3 = true;
           }
           this.folding[lastI+1][lastJ] = this.sequence.get(i);
-          this.foldingGraphic.draw("süd",this.sequence.get(i).getType());
+          this.foldingGraphic.draw("süd",this.sequence.get(i).getType(),String.valueOf(i),overlap3);
           lastI  = lastI+1;
           lastJ = lastJ;
           break;
         case 4:
+          boolean overlap4 = false;
           if (checkOverlapping(lastI-1,lastJ) == true){
             this.overlappings += 1;
+            overlap4 = true;
           }
           this.folding[lastI-1][lastJ] = this.sequence.get(i);
-          this.foldingGraphic.draw("nord",this.sequence.get(i).getType());
+          this.foldingGraphic.draw("nord",this.sequence.get(i).getType(),String.valueOf(i),overlap4);
           lastI  = lastI -1;
           lastJ = lastJ;
           break;

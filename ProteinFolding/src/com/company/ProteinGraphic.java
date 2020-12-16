@@ -12,11 +12,11 @@ import javax.imageio.ImageIO;
 
 public class ProteinGraphic {
 
-  static final int height = 500;
-  static final int width = 800;
-  static final int cellSize = 10;
-  int currentPointX = 500;
-  int currentPointY = 500;
+  static final int height = 1200;
+  static final int width = 1200;
+  static final int cellSize = 45;
+  int currentPointX = 600;
+  int currentPointY = 600;
   BufferedImage image;
   Graphics2D g2;
   int picNumber;
@@ -46,63 +46,164 @@ public class ProteinGraphic {
   }
 
   public void drawFirstAcid(int type){
+    String label = "0";
+    Font font = new Font("Serif", Font.PLAIN, 25);
     if (type == 0) {
       this.g2.setColor(new Color(255, 0, 0));
       this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+      this.g2.setColor(new Color(0, 0, 0));
+      g2.setFont(font);
+      FontMetrics metrics = g2.getFontMetrics();
+      int ascent = metrics.getAscent();
+      int labelWidth = metrics.stringWidth(label);
+      g2.drawString(label, currentPointX + cellSize/4  , currentPointY + cellSize/2  );
     } else if (type == 1) {
       this.g2.setColor(new Color(0, 0, 255));
       this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+      this.g2.setColor(new Color(255, 255, 255));
+      g2.setFont(font);
+      FontMetrics metrics = g2.getFontMetrics();
+      int ascent = metrics.getAscent();
+      int labelWidth = metrics.stringWidth(label);
+      g2.drawString(label, currentPointX +cellSize/4 , currentPointY + cellSize / 2  );
     }
   }
 
-  public void draw(String direction, int type) {
+  public void draw(String direction, int type, String paramLabel,boolean overlap) {
     // type 0 = hydrophob (good)
     // type 1 = hydrophil (bad)
 
+    String label = paramLabel;
+    Font font = new Font("Serif", Font.PLAIN, 25);
+    int distance = 80;
+
       switch (direction) {
         case "ost":
-          if (type == 0) {
-            this.currentPointX += this.currentPointX + 20;
-            this.g2.setColor(new Color(255, 0, 0));
-            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+          this.currentPointX +=  distance;
+          if (type == 0 ) {
+            if (overlap = true){
+              this.g2.setColor(new Color(128,128,128));
+            }else{
+              this.g2.setColor(new Color(255, 0, 0));
+            }
+
+            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.setColor(new Color(0, 0, 0));
+            g2.setFont(font);
+            FontMetrics metrics = g2.getFontMetrics();
+            int ascent = metrics.getAscent();
+            int labelWidth = metrics.stringWidth(label);
+            g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           } else if (type == 1) {
-            this.currentPointX += this.currentPointX + 20;
-            this.g2.setColor(new Color(0, 0, 255));
-            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            if (overlap = true){
+              this.g2.setColor(new Color(128,128,128));
+            }else{
+              this.g2.setColor(new Color(0, 0, 255));
+            }
+
+            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.setColor(new Color(255, 255, 255));
+            g2.setFont(font);
+            FontMetrics metrics = g2.getFontMetrics();
+            int ascent = metrics.getAscent();
+            int labelWidth = metrics.stringWidth(label);
+            g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           }
           break;
         case "west":
+          this.currentPointX -= distance;
           if (type == 0) {
-            this.currentPointX += this.currentPointX - 20;
-            this.g2.setColor(new Color(255, 0, 0));
-            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            if (overlap = true){
+              this.g2.setColor(new Color(128,128,128));
+            }else{
+              this.g2.setColor(new Color(255, 0, 0));
+            }
+
+            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.setColor(new Color(0, 0, 0));
+            g2.setFont(font);
+            FontMetrics metrics = g2.getFontMetrics();
+            int ascent = metrics.getAscent();
+            int labelWidth = metrics.stringWidth(label);
+            g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           } else if (type == 1) {
-            this.currentPointX += this.currentPointX - 20;
-            this.g2.setColor(new Color(0, 0, 255));
-            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            if (overlap = true){
+              this.g2.setColor(new Color(128,128,128));
+            }else{
+              this.g2.setColor(new Color(0, 0, 255));
+            }
+
+            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.setColor(new Color(255, 255, 255));
+            g2.setFont(font);
+            FontMetrics metrics = g2.getFontMetrics();
+            int ascent = metrics.getAscent();
+            int labelWidth = metrics.stringWidth(label);
+            g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           }
           break;
         case "süd":
+          this.currentPointY -= distance;
           if (type == 0) {
-            this.currentPointY += this.currentPointY - 20;
-            this.g2.setColor(new Color(255, 0, 0));
-            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            if (overlap = true){
+              this.g2.setColor(new Color(128,128,128));
+            }else{
+              this.g2.setColor(new Color(255, 0, 0));
+            }
+
+            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.setColor(new Color(0, 0, 0));
+            g2.setFont(font);
+            FontMetrics metrics = g2.getFontMetrics();
+            int ascent = metrics.getAscent();
+            int labelWidth = metrics.stringWidth(label);
+            g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           } else if (type == 1) {
-            this.currentPointY += this.currentPointY - 20;
-            this.g2.setColor(new Color(0, 0, 255));
-            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            if (overlap = true){
+              this.g2.setColor(new Color(128,128,128));
+            }else{
+              this.g2.setColor(new Color(0, 0, 255));
+            }
+
+            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.setColor(new Color(255, 255, 255));
+            g2.setFont(font);
+            FontMetrics metrics = g2.getFontMetrics();
+            int ascent = metrics.getAscent();
+            int labelWidth = metrics.stringWidth(label);
+            g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           }
           break;
         case "nord":
+          this.currentPointY +=  distance;
           if (type == 0) {
-            this.currentPointY += this.currentPointY + 20;
-            this.g2.setColor(new Color(255, 0, 0));
-            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            if (overlap = true){
+              this.g2.setColor(new Color(128,128,128));
+            }else{
+              this.g2.setColor(new Color(255, 0, 0));
+            }
+
+            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.setColor(new Color(0, 0, 0));
+            g2.setFont(font);
+            FontMetrics metrics = g2.getFontMetrics();
+            int ascent = metrics.getAscent();
+            int labelWidth = metrics.stringWidth(label);
+            g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
             break;
           } else if (type == 1) {
-            this.currentPointY += this.currentPointY + 20;
-            this.g2.setColor(new Color(0, 0, 255));
-            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            if (overlap = true){
+              this.g2.setColor(new Color(128,128,128));
+            }else{
+              this.g2.setColor(new Color(0, 0, 255));
+            }
+            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.setColor(new Color(255, 255, 255));
+            g2.setFont(font);
+            FontMetrics metrics = g2.getFontMetrics();
+            int ascent = metrics.getAscent();
+            int labelWidth = metrics.stringWidth(label);
+            g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
             break;
           }
           break;
