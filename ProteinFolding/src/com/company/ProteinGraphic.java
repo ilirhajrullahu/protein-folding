@@ -81,7 +81,7 @@ public class ProteinGraphic {
         case "ost":
           this.currentPointX +=  distance;
           if (type == 0 ) {
-            if (overlap = true){
+            if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
             }else{
               this.g2.setColor(new Color(255, 0, 0));
@@ -95,7 +95,7 @@ public class ProteinGraphic {
             int labelWidth = metrics.stringWidth(label);
             g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           } else if (type == 1) {
-            if (overlap = true){
+            if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
             }else{
               this.g2.setColor(new Color(0, 0, 255));
@@ -113,7 +113,7 @@ public class ProteinGraphic {
         case "west":
           this.currentPointX -= distance;
           if (type == 0) {
-            if (overlap = true){
+            if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
             }else{
               this.g2.setColor(new Color(255, 0, 0));
@@ -127,7 +127,7 @@ public class ProteinGraphic {
             int labelWidth = metrics.stringWidth(label);
             g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           } else if (type == 1) {
-            if (overlap = true){
+            if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
             }else{
               this.g2.setColor(new Color(0, 0, 255));
@@ -145,7 +145,7 @@ public class ProteinGraphic {
         case "süd":
           this.currentPointY -= distance;
           if (type == 0) {
-            if (overlap = true){
+            if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
             }else{
               this.g2.setColor(new Color(255, 0, 0));
@@ -159,7 +159,7 @@ public class ProteinGraphic {
             int labelWidth = metrics.stringWidth(label);
             g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           } else if (type == 1) {
-            if (overlap = true){
+            if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
             }else{
               this.g2.setColor(new Color(0, 0, 255));
@@ -177,7 +177,7 @@ public class ProteinGraphic {
         case "nord":
           this.currentPointY +=  distance;
           if (type == 0) {
-            if (overlap = true){
+            if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
             }else{
               this.g2.setColor(new Color(255, 0, 0));
@@ -192,7 +192,7 @@ public class ProteinGraphic {
             g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
             break;
           } else if (type == 1) {
-            if (overlap = true){
+            if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
             }else{
               this.g2.setColor(new Color(0, 0, 255));
