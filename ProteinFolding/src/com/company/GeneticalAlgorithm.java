@@ -1,4 +1,5 @@
 package com.company;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,12 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Logging {
+public class GeneticalAlgorithm {
 
   List<Generation> generations;
+public GeneticalAlgorithm(){
+  generations = new ArrayList<Generation>();
 
-  public Logging(){
-  }
+
+}
+
+
 
   public void writeToCSV() throws IOException {
     File file = new File("ProteinFolding/src/LogFiles/algorithm-log.csv");

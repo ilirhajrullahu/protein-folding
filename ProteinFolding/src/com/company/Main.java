@@ -1,8 +1,4 @@
 package com.company;
-import com.company.Generation;
-import com.company.Candidate;
-import com.company.Examples;
-import com.company.Logging;
 import java.io.IOException;
 
 public class Main {
@@ -15,7 +11,5 @@ public class Main {
         }
         generation1.calculateBestCandidate();
         generation1.printCandidates();
-        Logging logging = new Logging();
-        logging.writeToCSV();
     }
 }
