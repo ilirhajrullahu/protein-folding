@@ -1,5 +1,5 @@
 package com.company;
-
+import com.company.Aminoacid;
 import java.util.ArrayList;
 import java.util.List;
 

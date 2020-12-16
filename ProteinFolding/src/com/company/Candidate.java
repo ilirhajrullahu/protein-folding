@@ -1,5 +1,6 @@
 package com.company;
-
+import com.company.ProteinGraphic;
+import com.company.Aminoacid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,7 +20,7 @@ public class Candidate {
     this.fitness = 0.0;
     this.sequence = new ArrayList<Aminoacid>();
     this.foldingDirections = new ArrayList<Integer>();
-    foldingGraphic = new ProteinGraphic(pictureNumber);
+    this.foldingGraphic = new ProteinGraphic(pictureNumber);
     if (pSequence != "") {
       for (int i = 0; i < pSequence.length(); ++i) {
         this.sequence.add(new Aminoacid(Character.getNumericValue(pSequence.charAt(i)), i));
@@ -62,7 +63,7 @@ public class Candidate {
             this.overlappings += 1;
           }
           this.folding[lastI][lastJ+1] = this.sequence.get(i);
-          foldingGraphic.draw("ost",this.sequence.get(i).getType());
+          this.foldingGraphic.draw("ost",this.sequence.get(i).getType());
           lastI  = lastI;
           lastJ = lastJ + 1;
 
@@ -72,7 +73,7 @@ public class Candidate {
             this.overlappings += 1;
           }
           this.folding[lastI][lastJ-1] = this.sequence.get(i);
-          foldingGraphic.draw("west",this.sequence.get(i).getType());
+          this.foldingGraphic.draw("west",this.sequence.get(i).getType());
           lastI  = lastI;
           lastJ = lastJ - 1;
           break;
@@ -81,7 +82,7 @@ public class Candidate {
             this.overlappings += 1;
           }
           this.folding[lastI+1][lastJ] = this.sequence.get(i);
-          foldingGraphic.draw("süd",this.sequence.get(i).getType());
+          this.foldingGraphic.draw("süd",this.sequence.get(i).getType());
           lastI  = lastI+1;
           lastJ = lastJ;
           break;
@@ -90,7 +91,7 @@ public class Candidate {
             this.overlappings += 1;
           }
           this.folding[lastI-1][lastJ] = this.sequence.get(i);
-          foldingGraphic.draw("nord",this.sequence.get(i).getType());
+          this.foldingGraphic.draw("nord",this.sequence.get(i).getType());
           lastI  = lastI -1;
           lastJ = lastJ;
           break;

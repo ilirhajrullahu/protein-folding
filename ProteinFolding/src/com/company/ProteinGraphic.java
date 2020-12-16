@@ -12,8 +12,8 @@ import javax.imageio.ImageIO;
 
 public class ProteinGraphic {
 
-  static final int height = 1000;
-  static final int width = 1000;
+  static final int height = 500;
+  static final int width = 800;
   static final int cellSize = 10;
   int currentPointX = 500;
   int currentPointY = 500;
@@ -38,7 +38,7 @@ public class ProteinGraphic {
     }
 
     try {
-      ImageIO.write(image, "png", new File(folder + File.separator + filename));
+      ImageIO.write(this.image, "png", new File(folder + File.separator + filename));
     } catch (IOException e) {
       e.printStackTrace();
       System.exit(0);
@@ -64,45 +64,45 @@ public class ProteinGraphic {
           if (type == 0) {
             this.currentPointX += this.currentPointX + 20;
             this.g2.setColor(new Color(255, 0, 0));
-            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
           } else if (type == 1) {
             this.currentPointX += this.currentPointX + 20;
             this.g2.setColor(new Color(0, 0, 255));
-            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
           }
           break;
         case "west":
           if (type == 0) {
             this.currentPointX += this.currentPointX - 20;
             this.g2.setColor(new Color(255, 0, 0));
-            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
           } else if (type == 1) {
             this.currentPointX += this.currentPointX - 20;
             this.g2.setColor(new Color(0, 0, 255));
-            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
           }
           break;
         case "süd":
           if (type == 0) {
             this.currentPointY += this.currentPointY - 20;
             this.g2.setColor(new Color(255, 0, 0));
-            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
           } else if (type == 1) {
             this.currentPointY += this.currentPointY - 20;
             this.g2.setColor(new Color(0, 0, 255));
-            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
           }
           break;
         case "nord":
           if (type == 0) {
             this.currentPointY += this.currentPointY + 20;
             this.g2.setColor(new Color(255, 0, 0));
-            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
             break;
           } else if (type == 1) {
             this.currentPointY += this.currentPointY + 20;
             this.g2.setColor(new Color(0, 0, 255));
-            this.g2.fillRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
+            this.g2.drawRect(this.currentPointX, this.currentPointY, this.cellSize, this.cellSize);
             break;
           }
           break;
