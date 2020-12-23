@@ -222,7 +222,7 @@ public class Candidate {
     return this.fitness;
   }
 
-  public double getHydrophobeContacts() {
+  public int getHydrophobeContacts() {
     return this.hydrophobContacts;
   }
 
