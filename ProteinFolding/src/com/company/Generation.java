@@ -1,7 +1,7 @@
 package com.company;
-import com.company.Aminoacid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Generation {
   List<Candidate> candidates;
@@ -21,15 +21,28 @@ public class Generation {
 
   public void calculateBestCandidate(){
     int candidatePos = 0;
-    for ( int i = 0; i<this.candidates.size();++i){
-      if (this.candidates.get(i).getOverlappings() < this.candidates.get(candidatePos).getOverlappings()){
+    for ( int i = 1; i<this.candidates.size();++i){
+      if (this.candidates.get(i).getFitness() > this.candidates.get(candidatePos).getFitness()){
           candidatePos = i;
-      }else if (this.candidates.get(i).getOverlappings()==this.candidates.get(candidatePos).getOverlappings() && this.candidates.get(i).getFitness() > this.candidates.get(candidatePos).getFitness()){
-        candidatePos = i;
       }
     }
     this.bestCandidate = this.candidates.get(candidatePos);
     this.calculateAverageFitness();
+  }
+
+  public void fitnessProportionalSelection() {
+    List<Double> fortuneWheel = new ArrayList<Double>();
+    for (int i = 0; i < this.candidates.size(); ++i) {
+      int frequency = (int) (this.candidates.get(i).getFitness() * 100);
+      for (int j = 0; j < frequency; ++j) {
+        fortuneWheel.add(this.candidates.get(i).getFitness());
+      }
+    }
+    for (int k = 0; k<100;++k){
+      Random ran = new Random();
+      double x = fortuneWheel.get(ran.nextInt(fortuneWheel.size()) + 0);
+      System.out.println(x);
+    }
   }
 
   public void printCandidates(){

@@ -24,10 +24,8 @@ public class Candidate {
     if (pSequence != "") {
       for (int i = 0; i < pSequence.length(); ++i) {
         this.sequence.add(new Aminoacid(Character.getNumericValue(pSequence.charAt(i)), i));
-        System.out.println(Character.getNumericValue(pSequence.charAt(i)));
       }
     }
-    System.out.println("Sequence length: " + pSequence.length());
 
     this.folding = new Aminoacid[pLatticeSize][pLatticeSize];
     for (int i = 0; i < pLatticeSize; i++) {
@@ -55,7 +53,6 @@ public class Candidate {
     for (int i = 1; i < this.sequence.size();++i){
       Random ran = new Random();
       int x = ran.nextInt(4) + 1;
-      System.out.println("Random direction: " + x);
       this.foldingDirections.add(x);
       switch(x){
         case 1:
