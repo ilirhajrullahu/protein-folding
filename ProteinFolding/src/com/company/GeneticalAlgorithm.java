@@ -45,6 +45,10 @@ public GeneticalAlgorithm(){
     tempArr.add(String.valueOf(generation.getGenerationNumber()));
     tempArr.add(String.valueOf(generation.getAverageFitness()));
     tempArr.add(String.valueOf(generation.getBestCandidate().getFitness()));
+    tempArr.add(String.valueOf(this.fitnessOfBestUntilNow));
+    tempArr.add(String.valueOf(this.hydrophobContactsOfBestUntilNow));
+    tempArr.add(String.valueOf(this.overlapsOfBestUntilNow));
+
 
     String line = tempArr.stream().collect(Collectors.joining(","));
     fw.write(line);
