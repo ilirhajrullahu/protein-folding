@@ -12,8 +12,10 @@ public class Main {
       Candidate candidate = new Candidate(Examples.SEQ20, 50, i);
       generation1.addCandidate(candidate);
     }
+    generation1.calculateBestCandidate();
     geneticalAlgorithm.writeHeadersToCSV();
     geneticalAlgorithm.getGenerations().add(generation1);
+    geneticalAlgorithm.findBestUntilNow();
     geneticalAlgorithm.writeGenerationToCSV(generation1);
 
     geneticalAlgorithm.getGenerations().get(0).fitnessProportionalSelection();
@@ -22,11 +24,12 @@ public class Main {
 
     for (int x = 1; x < 10; ++x) {
       Generation generation = new Generation(x,geneticalAlgorithm.getGenerations().get(x-1).getCandidates());
+      generation.calculateBestCandidate();
       geneticalAlgorithm.getGenerations().add(generation);
+      geneticalAlgorithm.findBestUntilNow();
       geneticalAlgorithm.writeGenerationToCSV(generation);
       geneticalAlgorithm.getGenerations().get(x).fitnessProportionalSelection();
       geneticalAlgorithm.getGenerations().get(x).mutateCandidates();
-      geneticalAlgorithm.getGenerations().get(x).calculateBestCandidate();
     }
   }
 }

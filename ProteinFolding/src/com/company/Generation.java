@@ -20,7 +20,9 @@ public class Generation {
 
   public Generation(int gNumber2, List<Candidate> pCandidates) {
     this.candidates = new ArrayList<Candidate>();
-    this.candidates = pCandidates;
+    for (int i = 0; i < pCandidates.size();++i){
+      this.candidates.add(pCandidates.get(i));
+    }
     this.generationNumber = gNumber2;
     this.averageFitness = 0.0;
   }
