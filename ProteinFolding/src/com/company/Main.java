@@ -11,6 +11,11 @@ public class Main {
         }
         generation1.calculateBestCandidate();
         generation1.printCandidates();
-        generation1.fitnessProportionalSelection();
+        for (int j = 0; j < 1;++j){
+            generation1.fitnessProportionalSelection();
+            generation1.mutateCandidates();
+            generation1.calculateBestCandidate();
+        }
+        generation1.printCandidates();
     }
 }

@@ -32,21 +32,24 @@ public class Generation {
     this.calculateAverageFitness();
   }
 
+
+  // the candidates with best fitness have higher chance that they will live to the next generation
   public void fitnessProportionalSelection() {
-    List<Double> fortuneWheel = new ArrayList<Double>();
+    List<Candidate> fortuneWheel = new ArrayList<Candidate>();
     for (int i = 0; i < this.candidates.size(); ++i) {
       int frequency = (int) (this.candidates.get(i).getFitness() * 100);
       for (int j = 0; j < frequency; ++j) {
-        fortuneWheel.add(this.candidates.get(i).getFitness());
+        fortuneWheel.add(this.candidates.get(i));
       }
     }
+    this.candidates.clear();
+
     for (int k = 0; k < 100; ++k) {
       Random ran = new Random();
-      double randomFitness = fortuneWheel.get(ran.nextInt(fortuneWheel.size()) + 0);
-      System.out.println(randomFitness);
+      this.candidates.add(fortuneWheel.get(ran.nextInt(fortuneWheel.size()) + 0));
     }
   }
-  public void mutation() {
+  public void mutateCandidates() {
     List<String> directionArray = new ArrayList<String>();
     directionArray.add("ost");
     directionArray.add("west");
@@ -63,7 +66,7 @@ public class Generation {
         System.out.println("Entered mutation process");
         Random directionToMutate = new Random();
         int directionArrayIndex = directionToMutate.nextInt(4);
-        System.out.println("Changing: " + String.valueOf(directionArrayIndex));
+        System.out.println("Changing: " + String.valueOf(directionArrayIndex+1));
         Random rn2 = new Random();
         int newDirectionFromMutation = rn2.nextInt(4);
         while (newDirectionFromMutation == directionArrayIndex) {
@@ -71,12 +74,19 @@ public class Generation {
         }
 
         System.out.println("Changing to: " + String.valueOf(newDirectionFromMutation+1));
+        System.out.println("candidate before mutation");
+        this.candidates.get(i).printFoldingDirections();
 
-        for (int j = 0; j < this.candidates.get(i).getFoldingDirections().size(); ++j) {
-          if (directionArrayIndex + 1 == this.candidates.get(i).getFoldingDirections().get(j)) {
-            this.candidates.get(i).getFoldingDirections().set(j,newDirectionFromMutation+1);
-          }
+        Random rn3 = new Random();
+        int toChange = rn3.nextInt(20);
+
+        while (this.candidates.get(i).getFoldingDirections().get(toChange) != directionArrayIndex+1){
+          toChange = rn3.nextInt(20);
         }
+        this.candidates.get(i).getFoldingDirections().set(toChange,newDirectionFromMutation+1);
+
+        System.out.println("Candidate after mutation");
+        this.candidates.get(i).printFoldingDirections();
       }
     }
   }

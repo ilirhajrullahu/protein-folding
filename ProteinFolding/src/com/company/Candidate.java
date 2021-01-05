@@ -109,7 +109,7 @@ public class Candidate {
       }
     }
     this.foldingGraphic.saveToFile();
-    System.out.println("Finished folding");
+    //System.out.println("Finished folding");
   }
 
   public void calculateHydrophobContacts(){
@@ -206,6 +206,12 @@ public class Candidate {
       areNeighbours = false;
     }
     return areNeighbours;
+  }
+
+  public void printFoldingDirections() {
+    for (int i = 0; i < this.foldingDirections.size(); i++) {
+      System.out.println("Direction: " + this.foldingDirections.get(i));
+    }
   }
 
   public void printFolding() {
