@@ -1,5 +1,6 @@
 package com.company;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,9 +12,16 @@ public class Generation {
   int generationNumber;
   double averageFitness;
 
-  public Generation(int pNumber) {
+  public Generation(int gNumber) {
     this.candidates = new ArrayList<Candidate>();
-    this.generationNumber = pNumber;
+    this.generationNumber = gNumber;
+    this.averageFitness = 0.0;
+  }
+
+  public Generation(int gNumber2, List<Candidate> pCandidates) {
+    this.candidates = new ArrayList<Candidate>();
+    this.candidates = pCandidates;
+    this.generationNumber = gNumber2;
     this.averageFitness = 0.0;
   }
 
@@ -63,30 +71,21 @@ public class Generation {
       Random rn = new Random();
       double d = rn.nextDouble(); // random value in range 0.0 - 1.0
       if (d <= mutationRate) {
-        System.out.println("Entered mutation process");
         Random directionToMutate = new Random();
         int directionArrayIndex = directionToMutate.nextInt(4);
-        System.out.println("Changing: " + String.valueOf(directionArrayIndex+1));
         Random rn2 = new Random();
         int newDirectionFromMutation = rn2.nextInt(4);
         while (newDirectionFromMutation == directionArrayIndex) {
           newDirectionFromMutation = rn2.nextInt(4);
         }
 
-        System.out.println("Changing to: " + String.valueOf(newDirectionFromMutation+1));
-        System.out.println("candidate before mutation");
-        this.candidates.get(i).printFoldingDirections();
-
         Random rn3 = new Random();
-        int toChange = rn3.nextInt(20);
+        int toChange = rn3.nextInt(19);
 
         while (this.candidates.get(i).getFoldingDirections().get(toChange) != directionArrayIndex+1){
-          toChange = rn3.nextInt(20);
+          toChange = rn3.nextInt(19);
         }
         this.candidates.get(i).getFoldingDirections().set(toChange,newDirectionFromMutation+1);
-
-        System.out.println("Candidate after mutation");
-        this.candidates.get(i).printFoldingDirections();
       }
     }
   }
@@ -114,6 +113,10 @@ public class Generation {
 
   public Candidate getBestCandidate() {
     return this.bestCandidate;
+  }
+
+  public List<Candidate> getCandidates() {
+    return candidates;
   }
 
   public int getGenerationNumber() {

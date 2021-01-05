@@ -68,4 +68,20 @@ public GeneticalAlgorithm(){
     this.overlapsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidate().getOverlappings();
     this.hydrophobContactsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidate().getHydrophobeContacts();
   }
+
+  public List<Generation> getGenerations() {
+    return generations;
+  }
+
+  public double getFitnessOfBestUntilNow() {
+    return fitnessOfBestUntilNow;
+  }
+
+  public int getHydrophobContactsOfBestUntilNow() {
+    return hydrophobContactsOfBestUntilNow;
+  }
+
+  public int getOverlapsOfBestUntilNow() {
+    return overlapsOfBestUntilNow;
+  }
 }
