@@ -38,6 +38,10 @@ public class Candidate {
     this.calculateFitness();
   }
 
+  public List<Integer> getFoldingDirections() {
+    return foldingDirections;
+  }
+
   public void foldSequence() {
     // 1 = ost
     // 2 = west
