@@ -1,6 +1,5 @@
 package com.company;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,14 +12,14 @@ public class Generation {
   double averageFitness;
 
   public Generation(int gNumber) {
-    this.candidates = new ArrayList<Candidate>();
+    this.candidates = new ArrayList<>();
     this.generationNumber = gNumber;
     this.averageFitness = 0.0;
   }
 
   public Generation(int gNumber2, List<Candidate> pCandidates) {
-    this.candidates = new ArrayList<Candidate>();
-    for (int i = 0; i < pCandidates.size();++i){
+    this.candidates = new ArrayList<>();
+    for (int i = 0; i < pCandidates.size(); ++i) {
       this.candidates.add(pCandidates.get(i));
     }
     this.generationNumber = gNumber2;
@@ -31,7 +30,7 @@ public class Generation {
     this.candidates.add(candidate);
   }
 
-  public void calculateBestCandidate() {
+  public void calculateBestCandidateOfGeneration() {
     int candidatePos = 0;
     for (int i = 1; i < this.candidates.size(); ++i) {
       if (this.candidates.get(i).getFitness() > this.candidates.get(candidatePos).getFitness()) {
@@ -45,12 +44,16 @@ public class Generation {
 
   // the candidates with best fitness have higher chance that they will live to the next generation
   public void fitnessProportionalSelection() {
-    List<Candidate> fortuneWheel = new ArrayList<Candidate>();
+    List<Candidate> fortuneWheel = new ArrayList<>();
     for (int i = 0; i < this.candidates.size(); ++i) {
       int frequency = (int) (this.candidates.get(i).getFitness() * 100);
       for (int j = 0; j < frequency; ++j) {
         fortuneWheel.add(this.candidates.get(i));
       }
+    }
+
+    for (int j = 0; j  < this.candidates.size();++j){
+      this.candidates.remove(this.candidates.get(j));
     }
     this.candidates.clear();
 
@@ -59,8 +62,9 @@ public class Generation {
       this.candidates.add(fortuneWheel.get(ran.nextInt(fortuneWheel.size()) + 0));
     }
   }
+
   public void mutateCandidates() {
-    List<String> directionArray = new ArrayList<String>();
+    List<String> directionArray = new ArrayList<>();
     directionArray.add("ost");
     directionArray.add("west");
     directionArray.add("süd");
@@ -84,10 +88,11 @@ public class Generation {
         Random rn3 = new Random();
         int toChange = rn3.nextInt(19);
 
-        while (this.candidates.get(i).getFoldingDirections().get(toChange) != directionArrayIndex+1){
+        while (this.candidates.get(i).getFoldingDirections().get(toChange)
+            != directionArrayIndex + 1) {
           toChange = rn3.nextInt(19);
         }
-        this.candidates.get(i).getFoldingDirections().set(toChange,newDirectionFromMutation+1);
+        this.candidates.get(i).getFoldingDirections().set(toChange, newDirectionFromMutation + 1);
       }
     }
   }
@@ -113,7 +118,7 @@ public class Generation {
     this.averageFitness = temp / this.candidates.size();
   }
 
-  public Candidate getBestCandidate() {
+  public Candidate getBestCandidateOfGeneration() {
     return this.bestCandidate;
   }
 

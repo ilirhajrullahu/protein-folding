@@ -44,7 +44,7 @@ public GeneticalAlgorithm(){
     List<String> tempArr = new ArrayList<>();
     tempArr.add(String.valueOf(generation.getGenerationNumber()));
     tempArr.add(String.valueOf(generation.getAverageFitness()));
-    tempArr.add(String.valueOf(generation.getBestCandidate().getFitness()));
+    tempArr.add(String.valueOf(generation.getBestCandidateOfGeneration().getFitness()));
     tempArr.add(String.valueOf(this.fitnessOfBestUntilNow));
     tempArr.add(String.valueOf(this.hydrophobContactsOfBestUntilNow));
     tempArr.add(String.valueOf(this.overlapsOfBestUntilNow));
@@ -52,36 +52,35 @@ public GeneticalAlgorithm(){
 
     String line = tempArr.stream().collect(Collectors.joining(","));
     fw.write(line);
+    fw.write("\n");
     fw.close();
   }
 
-  public void findBestUntilNow(){
+  public void findBestCandidateOfAlgorithmUntilNow(){
     int candidatePos = 0;
-    for ( int i = 0; i < this.generations.size();++i){
-      if (this.generations.get(i).getBestCandidate().getOverlappings() < this.generations.get(candidatePos).getBestCandidate().getOverlappings()){
-        candidatePos = i;
-      }else if (this.generations.get(i).getBestCandidate().getOverlappings()==this.generations.get(candidatePos).getBestCandidate().getOverlappings() && this.generations.get(i).getBestCandidate().getFitness() > this.generations.get(candidatePos).getBestCandidate().getFitness()){
+    for ( int i = 1; i < this.generations.size();++i){
+      if (this.generations.get(i).getBestCandidateOfGeneration().getFitness() > this.generations.get(candidatePos).getBestCandidateOfGeneration().getFitness()){
         candidatePos = i;
       }
     }
-    this.fitnessOfBestUntilNow = this.generations.get(candidatePos).getBestCandidate().getFitness();
-    this.overlapsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidate().getOverlappings();
-    this.hydrophobContactsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidate().getHydrophobeContacts();
+    this.fitnessOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getFitness();
+    this.overlapsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getOverlappings();
+    this.hydrophobContactsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getHydrophobeContacts();
   }
 
   public List<Generation> getGenerations() {
-    return generations;
+    return this.generations;
   }
 
   public double getFitnessOfBestUntilNow() {
-    return fitnessOfBestUntilNow;
+    return this.fitnessOfBestUntilNow;
   }
 
   public int getHydrophobContactsOfBestUntilNow() {
-    return hydrophobContactsOfBestUntilNow;
+    return this.hydrophobContactsOfBestUntilNow;
   }
 
   public int getOverlapsOfBestUntilNow() {
-    return overlapsOfBestUntilNow;
+    return this.overlapsOfBestUntilNow;
   }
 }
