@@ -97,6 +97,52 @@ public class Generation {
     }
   }
 
+  public void crossOverCandidates(){
+
+    //mutationrate = % chance that a candidate can be subject to a crossover
+    double mutationRate = 0.25;
+
+    //   int randomNum = rand.nextInt((max - min) + 1) + min;
+
+    for (int i = 0; i < this.candidates.size(); ++i) {
+      Random rn = new Random();
+      double d = rn.nextDouble(); // random value in range 0.0 - 1.0
+      if (d <= mutationRate) {
+
+        Random rn3 = new Random();
+        int crossoverIndex = rn3.nextInt(20);
+
+        List <Integer> tempFoldingDirectionsOfCandidateOne = new ArrayList<>();
+        List <Integer> tempFoldingDirectionsOfCandidateTwo = new ArrayList<>();
+
+        for (int k = crossoverIndex; k < this.candidates.get(i).getFoldingDirections().size(); ++k){
+            tempFoldingDirectionsOfCandidateOne.add(this.candidates.get(i).getFoldingDirections().get(k));
+        }
+
+        Random rn2 = new Random();
+        int otherRandomCandidate = rn2.nextInt(100);
+
+        for (int z = crossoverIndex; z < this.candidates.get(i).getFoldingDirections().size(); ++z){
+          tempFoldingDirectionsOfCandidateTwo.add(this.candidates.get(otherRandomCandidate).getFoldingDirections().get(z));
+        }
+
+        int tmp1 = crossoverIndex;
+        for (int l = 0; l < tempFoldingDirectionsOfCandidateTwo.size();++l){
+            this.candidates.get(i).getFoldingDirections().set(tmp1,tempFoldingDirectionsOfCandidateTwo.get(l));
+            ++tmp1;
+        }
+
+        int tmp2 = crossoverIndex;
+        for (int s = 0; s < tempFoldingDirectionsOfCandidateOne.size();++s){
+          this.candidates.get(otherRandomCandidate).getFoldingDirections().set(tmp2,tempFoldingDirectionsOfCandidateTwo.get(s));
+          ++tmp2;
+        }
+
+      }
+    }
+
+  }
+
 
   public void printCandidates() {
     for (int i = 0; i < this.candidates.size(); ++i) {

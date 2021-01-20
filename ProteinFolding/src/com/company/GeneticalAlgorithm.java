@@ -63,9 +63,16 @@ public GeneticalAlgorithm(){
         candidatePos = i;
       }
     }
-    this.fitnessOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getFitness();
-    this.overlapsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getOverlappings();
-    this.hydrophobContactsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getHydrophobeContacts();
+
+    if (this.fitnessOfBestUntilNow < this.generations.get(candidatePos).getBestCandidateOfGeneration().getFitness()){
+      this.fitnessOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getFitness();
+    }
+    if (this.overlapsOfBestUntilNow < this.generations.get(candidatePos).getBestCandidateOfGeneration().getOverlappings()){
+      this.overlapsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getOverlappings();
+    }
+    if (this.hydrophobContactsOfBestUntilNow < this.generations.get(candidatePos).getBestCandidateOfGeneration().getHydrophobeContacts()){
+      this.hydrophobContactsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getHydrophobeContacts();
+    }
   }
 
   public List<Generation> getGenerations() {
