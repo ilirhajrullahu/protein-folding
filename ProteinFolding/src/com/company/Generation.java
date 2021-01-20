@@ -101,6 +101,13 @@ public class Generation {
     }
   }
 
+  generation 1 fitness fitnesspropportional
+                    ->
+  generation 2 mutation und crossover
+                und fitnessproportional
+                    ->
+  generation 3 mutation and crossover
+                und fitnessproportional
   public void crossOverCandidates() {
     //   int randomNum = rand.nextInt((max - min) + 1) + min;
     int candidatesForCrossover = (int) (this.candidates.size() * (this.crossOverRate / 100.0f));
