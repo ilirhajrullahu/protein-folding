@@ -13,12 +13,16 @@ public class GeneticalAlgorithm {
   double fitnessOfBestUntilNow;
   int hydrophobContactsOfBestUntilNow;
   int overlapsOfBestUntilNow;
+  int mutationRate;
+  int crossoverRate;
 
-public GeneticalAlgorithm(){
+public GeneticalAlgorithm(int pMutationRate, int pCrossOverRate){
   generations = new ArrayList<Generation>();
   this.fitnessOfBestUntilNow = 0.0;
   this.hydrophobContactsOfBestUntilNow = 0;
   this.overlapsOfBestUntilNow = 0;
+  this.mutationRate = pMutationRate;
+  this.crossoverRate = pCrossOverRate;
 }
 
   public void writeHeadersToCSV() throws IOException {
