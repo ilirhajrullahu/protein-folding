@@ -10,10 +10,10 @@ public class Generation {
   Candidate bestCandidate;
   int generationNumber;
   double averageFitness;
-  int mutationRate;
+  double mutationRate;
   int crossOverRate;
 
-  public Generation(int gNumber, int pMutationRate, int pCrossOverRate) {
+  public Generation(int gNumber, double pMutationRate, int pCrossOverRate) {
     this.candidates = new ArrayList<>();
     this.generationNumber = gNumber;
     this.averageFitness = 0.0;
@@ -21,7 +21,7 @@ public class Generation {
     this.crossOverRate = pCrossOverRate;     //mutationrate = % chance that a candidate can be subject to a crossover
   }
 
-  public Generation(int gNumber2, List<Candidate> pCandidates, int pMutationRate,
+  public Generation(int gNumber2, List<Candidate> pCandidates, double pMutationRate,
       int pCrossOverRate) {
     this.candidates = new ArrayList<>();
     for (int i = 0; i < pCandidates.size(); ++i) {
@@ -48,9 +48,9 @@ public class Generation {
     this.calculateAverageFitness();
   }
 
-
   // the candidates with best fitness have higher chance that they will live to the next generation
-  public void fitnessProportionalSelection() {
+  public List<Candidate> fitnessProportionalSelection() {
+    List <Candidate> candidatesAfterSelection = new ArrayList<>();
     List<Candidate> fortuneWheel = new ArrayList<>();
     for (int i = 0; i < this.candidates.size(); ++i) {
       int frequency = (int) (this.candidates.get(i).getFitness() * 100);
@@ -59,15 +59,11 @@ public class Generation {
       }
     }
 
-    for (int j = 0; j < this.candidates.size(); ++j) {
-      this.candidates.remove(this.candidates.get(j));
-    }
-    this.candidates.clear();
-
     for (int k = 0; k < 100; ++k) {
       Random ran = new Random();
-      this.candidates.add(fortuneWheel.get(ran.nextInt(fortuneWheel.size()) + 0));
+      candidatesAfterSelection.add(fortuneWheel.get(ran.nextInt(fortuneWheel.size()) + 0));
     }
+    return candidatesAfterSelection;
   }
 
   public void mutateCandidates() {
@@ -101,6 +97,7 @@ public class Generation {
     }
   }
 
+  /*
   generation 1 fitness fitnesspropportional
                     ->
   generation 2 mutation und crossover
@@ -108,6 +105,9 @@ public class Generation {
                     ->
   generation 3 mutation and crossover
                 und fitnessproportional
+   */
+
+
   public void crossOverCandidates() {
     //   int randomNum = rand.nextInt((max - min) + 1) + min;
     int candidatesForCrossover = (int) (this.candidates.size() * (this.crossOverRate / 100.0f));

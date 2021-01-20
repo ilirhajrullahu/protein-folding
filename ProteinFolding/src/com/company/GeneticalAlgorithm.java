@@ -13,10 +13,10 @@ public class GeneticalAlgorithm {
   double fitnessOfBestUntilNow;
   int hydrophobContactsOfBestUntilNow;
   int overlapsOfBestUntilNow;
-  int mutationRate;
+  double mutationRate;
   int crossoverRate;
 
-public GeneticalAlgorithm(int pMutationRate, int pCrossOverRate){
+public GeneticalAlgorithm(double pMutationRate, int pCrossOverRate){
   generations = new ArrayList<Generation>();
   this.fitnessOfBestUntilNow = 0.0;
   this.hydrophobContactsOfBestUntilNow = 0;
