@@ -20,6 +20,7 @@ public class Main {
 
     for (int i = 0; i < 100; ++i) {
       Candidate candidate = new Candidate(Examples.SEQ20, 50, i);
+      //candidate.foldSequence();
       generation1.addCandidate(candidate);
     }
 
@@ -28,10 +29,15 @@ public class Main {
     geneticalAlgorithm.findBestCandidateOfAlgorithmUntilNow();
     geneticalAlgorithm.writeGenerationToCSV(generation1);
 
+    // fitness proportional selection von x-1 generation sind die start kandidaten für x generation
+
     for (int x = 1; x < 50; ++x) {
       Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).fitnessProportionalSelection(),mutation,crossover);
-      generation.mutateCandidates();
       generation.crossOverCandidates();
+      generation.mutateCandidates();
+      generation.calculateHydrophobContactsOfCandidates();
+      generation.calculateFitnessOfCandidates();
+
       generation.calculateBestCandidateOfGeneration();
       geneticalAlgorithm.getGenerations().add(generation);
       geneticalAlgorithm.findBestCandidateOfAlgorithmUntilNow();

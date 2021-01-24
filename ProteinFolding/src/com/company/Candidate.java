@@ -20,7 +20,7 @@ public class Candidate {
     this.fitness = 0.0;
     this.sequence = new ArrayList<Aminoacid>();
     this.foldingDirections = new ArrayList<Integer>();
-    this.foldingGraphic = new ProteinGraphic(pictureNumber);
+    //this.foldingGraphic = new ProteinGraphic(pictureNumber);
     if (pSequence != "") {
       for (int i = 0; i < pSequence.length(); ++i) {
         this.sequence.add(new Aminoacid(Character.getNumericValue(pSequence.charAt(i)), i));
@@ -50,7 +50,7 @@ public class Candidate {
 
     int middleOfMatrix = this.folding.length / 2 ;
     this.folding[middleOfMatrix][middleOfMatrix] = this.sequence.get(0);
-    this.getFoldingGraphic().drawFirstAcid(this.sequence.get(0).getType());
+    //this.getFoldingGraphic().drawFirstAcid(this.sequence.get(0).getType());
     int lastI = middleOfMatrix;
     int lastJ = middleOfMatrix;
 
@@ -66,7 +66,7 @@ public class Candidate {
             overlap = true;
           }
           this.folding[lastI][lastJ+1] = this.sequence.get(i);
-          this.foldingGraphic.draw("ost",this.sequence.get(i).getType(), String.valueOf(i),overlap);
+          //this.foldingGraphic.draw("ost",this.sequence.get(i).getType(), String.valueOf(i),overlap);
           lastI  = lastI;
           lastJ = lastJ + 1;
 
@@ -78,7 +78,7 @@ public class Candidate {
             overlap2 = true;
           }
           this.folding[lastI][lastJ-1] = this.sequence.get(i);
-          this.foldingGraphic.draw("west",this.sequence.get(i).getType(),String.valueOf(i),overlap2);
+          //this.foldingGraphic.draw("west",this.sequence.get(i).getType(),String.valueOf(i),overlap2);
           lastI  = lastI;
           lastJ = lastJ - 1;
           break;
@@ -89,7 +89,7 @@ public class Candidate {
             overlap3 = true;
           }
           this.folding[lastI+1][lastJ] = this.sequence.get(i);
-          this.foldingGraphic.draw("süd",this.sequence.get(i).getType(),String.valueOf(i),overlap3);
+          //this.foldingGraphic.draw("süd",this.sequence.get(i).getType(),String.valueOf(i),overlap3);
           lastI  = lastI+1;
           lastJ = lastJ;
           break;
@@ -100,7 +100,7 @@ public class Candidate {
             overlap4 = true;
           }
           this.folding[lastI-1][lastJ] = this.sequence.get(i);
-          this.foldingGraphic.draw("nord",this.sequence.get(i).getType(),String.valueOf(i),overlap4);
+          //this.foldingGraphic.draw("nord",this.sequence.get(i).getType(),String.valueOf(i),overlap4);
           lastI  = lastI -1;
           lastJ = lastJ;
           break;
@@ -108,7 +108,7 @@ public class Candidate {
           System.out.println("No random correct number was created");
       }
     }
-    this.foldingGraphic.saveToFile();
+    //this.foldingGraphic.saveToFile();
     //System.out.println("Finished folding");
   }
 

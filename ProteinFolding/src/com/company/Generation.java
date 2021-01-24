@@ -37,6 +37,24 @@ public class Generation {
     this.candidates.add(candidate);
   }
 
+  public void foldSequencesOfCandidates(){
+    for (int i = 0; i < this.candidates.size();++i){
+      this.candidates.get(i).foldSequence();
+    }
+  }
+
+  public void calculateHydrophobContactsOfCandidates(){
+    for (int i = 0; i < this.candidates.size();++i){
+      this.candidates.get(i).calculateHydrophobContacts();
+    }
+  }
+
+  public void calculateFitnessOfCandidates(){
+    for (int i = 0; i < this.candidates.size();++i){
+      this.candidates.get(i).calculateFitness();
+    }
+  }
+
   public void calculateBestCandidateOfGeneration() {
     int candidatePos = 0;
     for (int i = 1; i < this.candidates.size(); ++i) {
@@ -48,12 +66,14 @@ public class Generation {
     this.calculateAverageFitness();
   }
 
-  // the candidates with best fitness have higher chance that they will live to the next generation
+  // the candidates with best fitness have higher chance that they will be selected to the next generation
   public List<Candidate> fitnessProportionalSelection() {
     List <Candidate> candidatesAfterSelection = new ArrayList<>();
-    List<Candidate> fortuneWheel = new ArrayList<>();
+    List <Candidate> fortuneWheel = new ArrayList<>();
+
     for (int i = 0; i < this.candidates.size(); ++i) {
-      int frequency = (int) (this.candidates.get(i).getFitness() * 100);
+
+      int frequency = (int) (this.candidates.get(i).getFitness() * 50);
       for (int j = 0; j < frequency; ++j) {
         fortuneWheel.add(this.candidates.get(i));
       }
@@ -61,9 +81,19 @@ public class Generation {
 
     for (int k = 0; k < 100; ++k) {
       Random ran = new Random();
-      candidatesAfterSelection.add(fortuneWheel.get(ran.nextInt(fortuneWheel.size()) + 0));
+      int temp = ran.nextInt(fortuneWheel.size());
+      candidatesAfterSelection.add(fortuneWheel.get(temp));
     }
     return candidatesAfterSelection;
+  }
+
+  public void tournamentSelection(int tournamentSize){
+    List <Candidate> candidatesAfterSelection = new ArrayList<>();
+    List <Candidate> tournamentCandidates = new ArrayList<>();
+
+
+
+
   }
 
   public void mutateCandidates() {
