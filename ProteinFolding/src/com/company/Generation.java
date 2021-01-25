@@ -37,20 +37,20 @@ public class Generation {
     this.candidates.add(candidate);
   }
 
-  public void foldSequencesOfCandidates(){
-    for (int i = 0; i < this.candidates.size();++i){
+  public void foldSequencesOfCandidates() {
+    for (int i = 0; i < this.candidates.size(); ++i) {
       this.candidates.get(i).foldSequence();
     }
   }
 
-  public void calculateHydrophobContactsOfCandidates(){
-    for (int i = 0; i < this.candidates.size();++i){
+  public void calculateHydrophobContactsOfCandidates() {
+    for (int i = 0; i < this.candidates.size(); ++i) {
       this.candidates.get(i).calculateHydrophobContacts();
     }
   }
 
-  public void calculateFitnessOfCandidates(){
-    for (int i = 0; i < this.candidates.size();++i){
+  public void calculateFitnessOfCandidates() {
+    for (int i = 0; i < this.candidates.size(); ++i) {
       this.candidates.get(i).calculateFitness();
     }
   }
@@ -68,9 +68,33 @@ public class Generation {
 
   // the candidates with best fitness have higher chance that they will be selected to the next generation
   public List<Candidate> fitnessProportionalSelection() {
-    List <Candidate> candidatesAfterSelection = new ArrayList<>();
-    List <Candidate> fortuneWheel = new ArrayList<>();
+    List<Candidate> candidatesAfterSelection = new ArrayList<>();
+    double sumOfAllFitnesses = 0.0;
 
+    for (int x = 0; x < this.candidates.size(); ++x) {
+      sumOfAllFitnesses += this.candidates.get(x).getFitness();
+    }
+
+    int randomBound = (int) sumOfAllFitnesses;
+    int populationSize = 0;
+
+    while (populationSize < this.candidates.size()) {
+      populationSize += 1;
+      Random ran2 = new Random();
+      int randomNumber = ran2.nextInt(randomBound + 1);
+      double partialSum = 0.0;
+
+      for (int i = 0; i < this.candidates.size(); ++i) {
+        partialSum += this.candidates.get(i).getFitness();
+
+        if (partialSum >= randomNumber) {
+          candidatesAfterSelection.add(this.candidates.get(i));
+          break;
+        }
+      }
+    }
+    //List<Candidate> fortuneWheel = new ArrayList<>();
+  /*
     for (int i = 0; i < this.candidates.size(); ++i) {
 
       int frequency = (int) (this.candidates.get(i).getFitness() * 50);
@@ -83,16 +107,13 @@ public class Generation {
       Random ran = new Random();
       int temp = ran.nextInt(fortuneWheel.size());
       candidatesAfterSelection.add(fortuneWheel.get(temp));
-    }
+    }*/
     return candidatesAfterSelection;
   }
 
-  public void tournamentSelection(int tournamentSize){
-    List <Candidate> candidatesAfterSelection = new ArrayList<>();
-    List <Candidate> tournamentCandidates = new ArrayList<>();
-
-
-
+  public void tournamentSelection(int tournamentSize) {
+    List<Candidate> candidatesAfterSelection = new ArrayList<>();
+    List<Candidate> tournamentCandidates = new ArrayList<>();
 
   }
 

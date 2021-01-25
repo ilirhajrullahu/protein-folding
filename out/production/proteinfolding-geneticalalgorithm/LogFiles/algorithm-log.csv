@@ -1,5 +1,5 @@
 generationNumber,averageFitnessOfGeneration,fitnessOfBestCandidateOfGeneration,fitnessOfBestCandidateUntilNow,hydrophobContactsOfBestCandidateUntilNow,OverlappingsOfBestCandidateUntilNow
-1,0.25375000000000014,0.8,0.8,4,4
-2,1.3915,5.6,5.6,28,4
-3,8.766000000000007,25.6,25.6,128,4
-4,55.157309999999946,79.2,79.2,396,4
+1,0.23785000000000012,1.5,1.5,6,3
+2,2.49484,9.0,9.0,36,3
+3,12.005300000000004,31.5,31.5,126,3
+4,55.48860000000003,90.0,90.0,360,3
