@@ -13,35 +13,51 @@ public class Main {
     System.out.print("Enter crossover rate: ");
     Scanner in2 = new Scanner(System.in);
     int crossover = in2.nextInt();
+    System.out.println("Tournamt size: ");
+    Scanner in3 = new Scanner(System.in);
+    int tournamentSize = in3.nextInt();
 
-    GeneticalAlgorithm geneticalAlgorithm = new GeneticalAlgorithm(mutation,crossover);
-    geneticalAlgorithm.writeHeadersToCSV();
-    Generation generation1 = new Generation(1,mutation,crossover);
+    System.out.println("Stop after seconds: ");
+    Scanner in5 = new Scanner(System.in);
+    int stopSeconds = in5.nextInt();
 
-    for (int i = 0; i < 100; ++i) {
-      Candidate candidate = new Candidate(Examples.SEQ20, 50, i);
-      //candidate.foldSequence();
-      generation1.addCandidate(candidate);
-    }
+    long start = System.currentTimeMillis();
+    long end = start + stopSeconds*1000;
+    while (System.currentTimeMillis() < end) {
+      GeneticalAlgorithm geneticalAlgorithm = new GeneticalAlgorithm(mutation,crossover);
+      geneticalAlgorithm.writeHeadersToCSV();
+      Generation generation1 = new Generation(1,mutation,crossover);
 
-    generation1.calculateBestCandidateOfGeneration(); // fitness of generation will be calculated too
-    geneticalAlgorithm.getGenerations().add(generation1);
-    geneticalAlgorithm.findBestCandidateOfAlgorithmUntilNow();
-    geneticalAlgorithm.writeGenerationToCSV(generation1);
+      for (int i = 0; i < 100; ++i) {
+        Candidate candidate = new Candidate(Examples.SEQ20, 50, i);
+        //candidate.foldSequence();
+        generation1.addCandidate(candidate);
+      }
 
-    // fitness proportional selection von x-1 generation sind die start kandidaten für x generation
-
-    for (int x = 1; x < 50; ++x) {
-      Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).fitnessProportionalSelection(),mutation,crossover);
-      generation.crossOverCandidates();
-      generation.mutateCandidates();
-      generation.calculateHydrophobContactsOfCandidates();
-      generation.calculateFitnessOfCandidates();
-
-      generation.calculateBestCandidateOfGeneration();
-      geneticalAlgorithm.getGenerations().add(generation);
+      generation1.calculateBestCandidateOfGeneration(); // fitness of generation will be calculated too
+      geneticalAlgorithm.getGenerations().add(generation1);
       geneticalAlgorithm.findBestCandidateOfAlgorithmUntilNow();
-      geneticalAlgorithm.writeGenerationToCSV(generation);
+      geneticalAlgorithm.writeGenerationToCSV(generation1);
+
+      // fitness proportional selection von x-1 generation sind die start kandidaten für x generation
+      for (int x = 1; x < 50; ++x) {
+        //System.out.println("Enter mutation rate: ");
+        //Scanner in4 = new Scanner(System.in).useLocale(Locale.US);
+        //double mutation4 = in4.nextDouble();
+        //Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).fitnessProportionalSelection(),mutation,crossover);
+        Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).tournamentSelection(tournamentSize),mutation,crossover);
+
+        generation.crossOverCandidates();
+        generation.mutateCandidates();
+        generation.calculateHydrophobContactsOfCandidates();
+        generation.calculateFitnessOfCandidates();
+
+        generation.calculateBestCandidateOfGeneration();
+        geneticalAlgorithm.getGenerations().add(generation);
+        geneticalAlgorithm.findBestCandidateOfAlgorithmUntilNow();
+        geneticalAlgorithm.writeGenerationToCSV(generation);
+        System.out.println("Generation: " + generation.getGenerationNumber() + " done");
+      }
     }
-  }
+    }
 }

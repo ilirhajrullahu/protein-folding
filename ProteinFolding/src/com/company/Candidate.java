@@ -113,6 +113,7 @@ public class Candidate {
   }
 
   public void calculateHydrophobContacts(){
+    this.hydrophobContacts = 0;
     for (int i = 0; i < this.folding.length; ++i) {
       for (int j = 0; j < this.folding[i].length; ++j) {
         if (checkVerticalFoldingNeighbours(i, j) == true
@@ -150,7 +151,7 @@ public class Candidate {
 
   public boolean checkVerticalFoldingNeighbours(int i, int j) {
     boolean areVerticalNeighbours = false;
-    if (i - 1 >= 0) {
+    /*if (i - 1 >= 0) {
       if (this.folding[i][j].getType() == 1 && this.folding[i][j].getType() == this.folding[i
           - 1][j].getType()
           && this.folding[i][j].getType() != -1
@@ -159,7 +160,7 @@ public class Candidate {
       } else {
         areVerticalNeighbours = false;
       }
-    }
+    }*/
     if (i + 1 <= this.folding.length - 1) {
       if (this.folding[i][j].getType() == 1 && this.folding[i][j].getType() == this.folding[i
           + 1][j].getType() &&
@@ -175,7 +176,7 @@ public class Candidate {
 
   public boolean checkHorizontalFoldingNeighbours(int i, int j) {
     boolean areHorizontalNeighbours = false;
-    if (j - 1 >= 0) {
+    /*if (j - 1 >= 0) {
       if (this.folding[i][j].getType() == 1 && this.folding[i][j].getType() == this.folding[i][j
           - 1].getType()
           && this.folding[i][j].getType() != -1
@@ -184,7 +185,7 @@ public class Candidate {
       } else {
         areHorizontalNeighbours = false;
       }
-    }
+    }*/
     if (j + 1 <= this.folding.length - 1) {
       if (this.folding[i][j].getType() == 1 && this.folding[i][j].getType() == this.folding[i][j
           + 1].getType() &&

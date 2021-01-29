@@ -1,8 +1,11 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 public class Generation {
 
@@ -111,10 +114,25 @@ public class Generation {
     return candidatesAfterSelection;
   }
 
-  public void tournamentSelection(int tournamentSize) {
+  public List<Candidate> tournamentSelection(int tournamentSize) {
     List<Candidate> candidatesAfterSelection = new ArrayList<>();
     List<Candidate> tournamentCandidates = new ArrayList<>();
 
+    while (candidatesAfterSelection.size()<=100){
+      for (int i = 0; i < tournamentSize; ++i){
+        Random ran = new Random();
+        int toSelect = ran.nextInt(100);
+        tournamentCandidates.add(this.candidates.get(toSelect));
+      }
+      int index = 0;
+      for (int k = 1; k < tournamentCandidates.size();++k){
+        if (tournamentCandidates.get(index).getFitness() < tournamentCandidates.get(k).getFitness()){
+          index = k;
+        }
+      }
+      candidatesAfterSelection.add(tournamentCandidates.get(index));
+    }
+    return candidatesAfterSelection;
   }
 
   public void mutateCandidates() {
@@ -125,6 +143,7 @@ public class Generation {
     directionArray.add("nord");
 
     for (int i = 0; i < this.candidates.size(); ++i) {
+      //System.out.println("Before mutation: " + this.candidates.get(i).getFoldingDirections());
       Random rn = new Random();
       double d = rn.nextDouble(); // random value in range 0.0 - 1.0
       if (d <= this.mutationRate) {
@@ -144,8 +163,11 @@ public class Generation {
           toChange = rn3.nextInt(19);
         }
         this.candidates.get(i).getFoldingDirections().set(toChange, newDirectionFromMutation + 1);
+
       }
+      //System.out.println("After change: " + this.candidates.get(i).getFoldingDirections());
     }
+
   }
 
   /*
