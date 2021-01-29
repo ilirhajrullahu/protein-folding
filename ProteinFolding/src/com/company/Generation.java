@@ -1,11 +1,8 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 
 public class Generation {
 
@@ -96,21 +93,6 @@ public class Generation {
         }
       }
     }
-    //List<Candidate> fortuneWheel = new ArrayList<>();
-  /*
-    for (int i = 0; i < this.candidates.size(); ++i) {
-
-      int frequency = (int) (this.candidates.get(i).getFitness() * 50);
-      for (int j = 0; j < frequency; ++j) {
-        fortuneWheel.add(this.candidates.get(i));
-      }
-    }
-
-    for (int k = 0; k < 100; ++k) {
-      Random ran = new Random();
-      int temp = ran.nextInt(fortuneWheel.size());
-      candidatesAfterSelection.add(fortuneWheel.get(temp));
-    }*/
     return candidatesAfterSelection;
   }
 
@@ -143,7 +125,7 @@ public class Generation {
     directionArray.add("nord");
 
     for (int i = 0; i < this.candidates.size(); ++i) {
-      //System.out.println("Before mutation: " + this.candidates.get(i).getFoldingDirections());
+
       Random rn = new Random();
       double d = rn.nextDouble(); // random value in range 0.0 - 1.0
       if (d <= this.mutationRate) {
@@ -152,20 +134,30 @@ public class Generation {
         Random rn2 = new Random();
         int newDirectionFromMutation = rn2.nextInt(4);
         while (newDirectionFromMutation == directionArrayIndex) {
-          newDirectionFromMutation = rn2.nextInt(4);
+          Random rnk = new Random();
+          newDirectionFromMutation = rnk.nextInt(4);
         }
 
         Random rn3 = new Random();
-        int toChange = rn3.nextInt(19);
+        int chromosomeToChange = rn3.nextInt(19);
 
-        while (this.candidates.get(i).getFoldingDirections().get(toChange)
-            != directionArrayIndex + 1) {
-          toChange = rn3.nextInt(19);
+
+        // look for the first chrosome with the specific direction to change
+
+        int lookUpCounter = 1;
+        boolean change = false;
+        while (this.candidates.get(i).getFoldingDirections().get(chromosomeToChange) != directionArrayIndex + 1 && lookUpCounter <20) {
+          Random rnz = new Random();
+          chromosomeToChange = rnz.nextInt(19);
+          ++lookUpCounter;
+          if (this.candidates.get(i).getFoldingDirections().get(chromosomeToChange) == directionArrayIndex + 1 && lookUpCounter < 20){
+            change = true;
+          }
         }
-        this.candidates.get(i).getFoldingDirections().set(toChange, newDirectionFromMutation + 1);
-
+        if (change){
+          this.candidates.get(i).getFoldingDirections().set(chromosomeToChange, newDirectionFromMutation + 1);
+        }
       }
-      //System.out.println("After change: " + this.candidates.get(i).getFoldingDirections());
     }
 
   }

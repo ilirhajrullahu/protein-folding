@@ -40,12 +40,12 @@ public class Main {
       geneticalAlgorithm.writeGenerationToCSV(generation1);
 
       // fitness proportional selection von x-1 generation sind die start kandidaten für x generation
-      for (int x = 1; x < 50; ++x) {
+      for (int x = 1; x < 1200; ++x) {
         //System.out.println("Enter mutation rate: ");
         //Scanner in4 = new Scanner(System.in).useLocale(Locale.US);
         //double mutation4 = in4.nextDouble();
-        //Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).fitnessProportionalSelection(),mutation,crossover);
-        Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).tournamentSelection(tournamentSize),mutation,crossover);
+        Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).fitnessProportionalSelection(),mutation,crossover);
+        //Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).tournamentSelection(tournamentSize),mutation,crossover);
 
         generation.crossOverCandidates();
         generation.mutateCandidates();
