@@ -1,14 +1,10 @@
 package com.company;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
 public class ProteinGraphic {
 
@@ -17,6 +13,8 @@ public class ProteinGraphic {
   static final int cellSize = 45;
   int currentPointX = 600;
   int currentPointY = 600;
+  int lastPointX = 0;
+  int lastPointY = 0;
   BufferedImage image;
   Graphics2D g2;
   int picNumber;
@@ -79,7 +77,11 @@ public class ProteinGraphic {
 
       switch (direction) {
         case "ost":
+          this.lastPointX = currentPointX;
+          this.lastPointY = currentPointY;
           this.currentPointX +=  distance;
+          g2.setColor(Color.BLACK);
+          g2.drawLine(lastPointX +22 ,lastPointY + 22,currentPointX +22 ,currentPointY +22);
           if (type == 0 ) {
             if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
@@ -109,9 +111,14 @@ public class ProteinGraphic {
             int labelWidth = metrics.stringWidth(label);
             g2.drawString(label, currentPointX + cellSize/2  , currentPointY + cellSize/2 );
           }
+
           break;
         case "west":
+          this.lastPointX = currentPointX;
+          this.lastPointY = currentPointY;
           this.currentPointX -= distance;
+          g2.setColor(Color.BLACK);
+          g2.drawLine(lastPointX +22 ,lastPointY + 22,currentPointX +22 ,currentPointY +22);
           if (type == 0) {
             if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
@@ -143,7 +150,11 @@ public class ProteinGraphic {
           }
           break;
         case "süd":
+          this.lastPointX = currentPointX;
+          this.lastPointY = currentPointY;
           this.currentPointY -= distance;
+          g2.setColor(Color.BLACK);
+          g2.drawLine(lastPointX +22 ,lastPointY + 22,currentPointX +22 ,currentPointY +22);
           if (type == 0) {
             if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
@@ -175,7 +186,11 @@ public class ProteinGraphic {
           }
           break;
         case "nord":
+          this.lastPointX = currentPointX;
+          this.lastPointY = currentPointY;
           this.currentPointY +=  distance;
+          g2.setColor(Color.BLACK);
+          g2.drawLine(lastPointX +22 ,lastPointY + 22,currentPointX +22 ,currentPointY +22);
           if (type == 0) {
             if (overlap == true){
               this.g2.setColor(new Color(128,128,128));
@@ -210,5 +225,26 @@ public class ProteinGraphic {
         default:
           break;
       }
+    }
+    public void printCandidateInformation (int hydroContacts, int overlaps, double fitness){
+    Font font = new Font("Serif", Font.PLAIN, 30);
+
+    int hydroC = hydroContacts;
+    int overl = overlaps;
+    double fit = fitness;
+
+    this.g2.setColor(Color.BLACK);
+    String label ="Hydrophobcontacts: " + hydroC;
+    this.g2.setFont(font);
+    FontMetrics metrics = this.g2.getFontMetrics();
+    int ascent = metrics.getAscent();
+    int labelWidth = metrics.stringWidth(label);
+    this.g2.drawString(label, 30  , 55 );
+    label = "Overlappings: " + overl;
+    this.g2.drawString(label, 30, 100);
+    label = "Fitness: " + fit;
+    this.g2.drawString(label, 30, 150);
+
+
     }
 }

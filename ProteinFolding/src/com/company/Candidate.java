@@ -34,6 +34,9 @@ public class Candidate {
     this.foldSequence();
     this.calculateHydrophobContacts();
     this.calculateFitness();
+    this.printInformationOnGraphic();
+    this.foldingGraphic.saveToFile();
+
   }
 
   public List<Integer> getFoldingDirections() {
@@ -106,7 +109,6 @@ public class Candidate {
           System.out.println("No random correct number was created");
       }
     }
-    this.foldingGraphic.saveToFile();
   }
 
   public void calculateHydrophobContacts(){
@@ -184,6 +186,10 @@ public class Candidate {
       areNeighbours = false;
     }
     return areNeighbours;
+  }
+
+  public void printInformationOnGraphic(){
+    this.getFoldingGraphic().printCandidateInformation(hydrophobContacts, overlappings, fitness);
   }
 
   public void printFoldingDirections() {
