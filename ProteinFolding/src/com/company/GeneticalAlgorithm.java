@@ -15,6 +15,7 @@ public class GeneticalAlgorithm {
   int overlapsOfBestUntilNow;
   double mutationRate;
   int crossoverRate;
+  Candidate bestCandidate;
 
 public GeneticalAlgorithm(double pMutationRate, int pCrossOverRate){
   generations = new ArrayList<Generation>();
@@ -70,7 +71,11 @@ public GeneticalAlgorithm(double pMutationRate, int pCrossOverRate){
       this.fitnessOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getFitness();
       this.overlapsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getOverlappings();
       this.hydrophobContactsOfBestUntilNow = this.generations.get(candidatePos).getBestCandidateOfGeneration().getHydrophobeContacts();
+      this.bestCandidate = this.generations.get(candidatePos).getBestCandidateOfGeneration();
+  }
 
+  public Candidate getBestCandidate() {
+    return this.bestCandidate;
   }
 
   public List<Generation> getGenerations() {

@@ -29,7 +29,7 @@ public class Main {
       Generation generation1 = new Generation(1,mutation,crossover);
 
       for (int i = 0; i < 100; ++i) {
-        Candidate candidate = new Candidate(Examples.SEQ20, 50, i);
+        Candidate candidate = new Candidate(Examples.SEQ36, 100, i);
         //candidate.foldSequence();
         generation1.addCandidate(candidate);
       }
@@ -44,8 +44,8 @@ public class Main {
         //System.out.println("Enter mutation rate: ");
         //Scanner in4 = new Scanner(System.in).useLocale(Locale.US);
         //double mutation4 = in4.nextDouble();
-        Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).fitnessProportionalSelection(),mutation,crossover);
-        //Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).tournamentSelection(tournamentSize),mutation,crossover);
+        //Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).fitnessProportionalSelection(),mutation,crossover);
+        Generation generation = new Generation(x+1,geneticalAlgorithm.getGenerations().get(x-1).tournamentSelection(tournamentSize),mutation,crossover);
 
         generation.crossOverCandidates();
         generation.mutateCandidates();
@@ -58,6 +58,7 @@ public class Main {
         geneticalAlgorithm.writeGenerationToCSV(generation);
         System.out.println("Generation: " + generation.getGenerationNumber() + " done");
       }
+      geneticalAlgorithm.getBestCandidate().getFoldingGraphic().saveBestToFile();
     }
-    }
+  }
 }

@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class ProteinGraphic {
 
-  static final int height = 1200;
-  static final int width = 1200;
+  static final int height = 1600;
+  static final int width = 1600;
   static final int cellSize = 45;
   int currentPointX = 600;
   int currentPointY = 600;
@@ -31,6 +31,21 @@ public class ProteinGraphic {
   public void saveToFile() {
     String folder = "ProteinFolding/src/foldingImages/";
     String filename = "bild" + this.picNumber + ".png";
+    if (new File(folder).exists() == false) {
+      new File(folder).mkdirs();
+    }
+
+    try {
+      ImageIO.write(this.image, "png", new File(folder + File.separator + filename));
+    } catch (IOException e) {
+      e.printStackTrace();
+      System.exit(0);
+    }
+  }
+
+  public void saveBestToFile() {
+    String folder = "ProteinFolding/src/foldingImages/";
+    String filename = "best" + ".png";
     if (new File(folder).exists() == false) {
       new File(folder).mkdirs();
     }
